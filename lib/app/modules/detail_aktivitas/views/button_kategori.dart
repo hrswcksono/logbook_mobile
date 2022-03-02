@@ -27,8 +27,9 @@ class ButtonKategori extends GetView<DetailAktivitasController> {
                     onTap: onPress,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.blue,
-                          border: Border.all(color: Colors.blueAccent)),
+                          color: Color.fromRGBO(80, 155, 248, 1),
+                          border: Border.all(
+                              color: Color.fromRGBO(80, 155, 248, 1))),
                       child: Center(
                           child: Text(
                         text!,
@@ -43,7 +44,8 @@ class ButtonKategori extends GetView<DetailAktivitasController> {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          border: Border.all(color: Colors.blueAccent)),
+                          border: Border.all(
+                              color: Color.fromRGBO(203, 225, 253, 1))),
                       child: Center(
                           child: Text(
                         text!,

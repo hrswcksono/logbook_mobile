@@ -50,10 +50,7 @@ class HomeView extends GetView<HomeController> {
                         SizedBox(
                             height: 100.0,
                             width: 60.0,
-                            child: Icon(
-                              Icons.filter_list,
-                              size: 30.0,
-                            ))
+                            child: Image.asset('assets/icons/mi_filter.png'))
                       ],
                       // bottom: TabBar(
                       //     indicatorColor: Colors.white,

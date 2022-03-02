@@ -38,7 +38,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   Text(
                     "Detail Aktivitas",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 24,
                       fontFamily: 'Kanit',
                     ),
                   )
@@ -63,7 +63,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     () => Checkbox(
                         value: controller.btnCheck.value,
                         onChanged: (_) {
-                          controller.onCheckTitle();
+                          controller.btnCheck.toggle();
                         }),
                   ),
                   Text("Judul")
@@ -79,14 +79,23 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 width: Get.width,
                 height: 100,
                 color: Colors.white,
-                child: TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
-                  maxLines: null,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(border: InputBorder.none),
+                    maxLines: null,
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 15,
               ),
               Align(
                 alignment: Alignment.centerLeft,
@@ -97,6 +106,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       fontFamily: 'Kanit',
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               GridView.builder(
                   shrinkWrap: true,
@@ -109,79 +121,16 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   ),
                   itemBuilder: (context, index) {
                     return ButtonKategori(
-                        text: kategori[index],
-                        onPress: () {
-                          controller.onBtnOther();
-                        },
-                        stateValue: controller.btnOther);
+                      text: controller.listKategori[index].text,
+                      onPress: () {
+                        controller.btnCheck.toggle();
+                      },
+                      stateValue: controller.btnCheck,
+                    );
                   }),
-              // ButtonKategori(
-              //     text: kategori[0],
-              //     onPress: () {
-              //       controller.btnOther.toggle();
-              //     },
-              //     stateValue: controller.btnOther),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     // Container(
-              //     //   height: 40,
-              //     //   width: Get.width * 0.27,
-              //     //   decoration: BoxDecoration(
-              //     //       border: Border.all(color: Colors.blueAccent)),
-              //     //   child: Center(child: Text(kategori[0])),
-              //     // ),
-              //     ButtonKategori(
-              //         text: kategori[0],
-              //         onPress: () {
-              //           controller.onBtnOther();
-              //         },
-              //         stateValue: controller.btnOther),
-              //     Container(
-              //       height: 40,
-              //       width: Get.width * 0.27,
-              //       decoration: BoxDecoration(
-              //           border: Border.all(color: Colors.blueAccent)),
-              //       child: Center(child: Text(kategori[1])),
-              //     ),
-              //     Container(
-              //       height: 40,
-              //       width: Get.width * 0.27,
-              //       decoration: BoxDecoration(
-              //           border: Border.all(color: Colors.blueAccent)),
-              //       child: Center(child: Text(kategori[2])),
-              //     )
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: Get.height * 0.01,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Container(
-              //       height: 40,
-              //       width: Get.width * 0.27,
-              //       decoration: BoxDecoration(
-              //           border: Border.all(color: Colors.blueAccent)),
-              //       child: Center(child: Text(kategori[3])),
-              //     ),
-              //     Container(
-              //       height: 40,
-              //       width: Get.width * 0.27,
-              //       decoration: BoxDecoration(
-              //           border: Border.all(color: Colors.blueAccent)),
-              //       child: Center(child: Text(kategori[4])),
-              //     ),
-              //     Container(
-              //       height: 40,
-              //       width: Get.width * 0.27,
-              //       decoration: BoxDecoration(
-              //           border: Border.all(color: Colors.blueAccent)),
-              //       child: Center(child: Text(kategori[5])),
-              //     )
-              //   ],
-              // ),
+              SizedBox(
+                height: 15,
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -202,6 +151,13 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
               ),
+              // Container(
+              //   child: Row(
+              //     children: [
+
+              //     ],
+              //   ),
+              // ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -212,34 +168,68 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
-                height: 60,
+                height: 55,
                 width: Get.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Color.fromRGBO(201, 223, 251, 1)),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Row(
-                    children: [Text("25 Oktober 2020")],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Pilih Waktu",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset(
+                        'assets/icons/arrow_down.png',
+                        width: 25,
+                        fit: BoxFit.cover,
+                      )
+                    ],
                   ),
                 ),
               ),
+              SizedBox(
+                height: 15,
+              ),
               Container(
-                height: 60,
+                height: 55,
                 width: Get.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Color.fromRGBO(201, 223, 251, 1)),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Row(
-                    children: [Text("25 Oktober 2020")],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Pilih Tanggal",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset(
+                        'assets/icons/calender.png',
+                        width: 25,
+                        fit: BoxFit.cover,
+                      )
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         )),
