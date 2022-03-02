@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/views/button_kategori.dart';
+import 'package:logbook_mobile/app/modules/detail_aktivitas/views/list_sub_aktivitas_view.dart';
 
 import '../controllers/detail_aktivitas_controller.dart';
 
@@ -153,11 +154,66 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
               ),
+              ListSubAktivitasView(
+                  title: "dsdsdsdfsd",
+                  onChange: controller.btnCheck.toggle(),
+                  stateValue: controller.btnCheck),
               // Container(
-              //   child: Row(
-              //     children: [
-
-              //     ],
+              //   // color: Colors.blueAccent,
+              //   height: 70,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(top: 5),
+              //     child: Column(
+              //       children: [
+              //         Row(
+              //           children: [
+              //             SizedBox(
+              //               width: 10,
+              //             ),
+              //             Column(
+              //               crossAxisAlignment: CrossAxisAlignment.center,
+              //               mainAxisAlignment: MainAxisAlignment.center,
+              //               children: [
+              //                 Container(
+              //                   decoration: BoxDecoration(
+              //                     borderRadius: BorderRadius.circular(50),
+              //                     color: Color.fromRGBO(229, 229, 229, 1),
+              //                   ),
+              //                   height: 3,
+              //                   width: Get.width * 0.06,
+              //                 ),
+              //                 SizedBox(
+              //                   height: 5,
+              //                 ),
+              //                 Container(
+              //                   decoration: BoxDecoration(
+              //                     borderRadius: BorderRadius.circular(50),
+              //                     color: Color.fromRGBO(229, 229, 229, 1),
+              //                   ),
+              //                   height: 3,
+              //                   width: Get.width * 0.06,
+              //                 )
+              //               ],
+              //             ),
+              //             Obx(
+              //               () => Checkbox(
+              //                   value: controller.btnCheck.value,
+              //                   onChanged: (_) {
+              //                     controller.btnCheck.toggle();
+              //                   }),
+              //             ),
+              //             Text(
+              //               "Analisis",
+              //               style: TextStyle(
+              //                 fontSize: 18,
+              //                 fontFamily: 'Kanit',
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         Divider(color: Color.fromRGBO(167, 205, 251, 1)),
+              //       ],
+              //     ),
               //   ),
               // ),
               Align(
