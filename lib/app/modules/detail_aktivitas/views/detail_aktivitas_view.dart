@@ -123,9 +123,11 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     return ButtonKategori(
                       text: controller.listKategori[index].text,
                       onPress: () {
-                        controller.btnCheck.toggle();
+                        // controller.listKategori[index].statusButton =
+                        //     !controller.listKategori[index].statusButton;
+                        controller.fillBtnKategory[index].toggle();
                       },
-                      stateValue: controller.btnCheck,
+                      stateValue: controller.fillBtnKategory[index],
                     );
                   }),
               SizedBox(

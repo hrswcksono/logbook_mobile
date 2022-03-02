@@ -7,6 +7,16 @@ class DetailAktivitasController extends GetxController with StateMixin {
 
   var btnCheck = false.obs;
   var listKategori = List<Kategori>.empty().obs;
+  var btnKategori = false.obs;
+
+  List<RxBool> fillBtnKategory = [
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs
+  ];
 
   List<String> kategori = [
     "Concept",

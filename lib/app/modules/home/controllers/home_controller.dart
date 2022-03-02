@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with StateMixin {
   //TODO: Implement HomeController
 
   RxBool btnCheckBox = false.obs;
