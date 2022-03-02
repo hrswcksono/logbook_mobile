@@ -1,8 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HariIniView extends GetView {
   @override
@@ -17,6 +17,12 @@ class HariIniView extends GetView {
         child: SingleChildScrollView(
             child: Column(
           children: [
+            TableCalendar(
+              firstDay: DateTime(2018, 1, 13),
+              lastDay: DateTime(2050, 1, 13),
+              focusedDay: DateTime.now(),
+              calendarFormat: CalendarFormat.week,
+            ),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -78,7 +84,9 @@ class HariIniView extends GetView {
         padding: EdgeInsets.all(8.0),
         child: MaterialButton(
           height: 60,
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed('/detail-aktivitas');
+          },
           color: Colors.blue,
           child: Text(
             "+ Tambah Aktivitas",

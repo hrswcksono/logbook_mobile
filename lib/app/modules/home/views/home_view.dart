@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile/app/modules/home/views/bulan_view.dart';
 import 'package:logbook_mobile/app/modules/home/views/hari_ini_view.dart';
+import 'package:logbook_mobile/app/util/main_drawer.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -28,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           length: myTab.length,
           child: Scaffold(
               appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(150.0),
+                  preferredSize: Size.fromHeight(100.0),
                   child: Container(
                     margin: EdgeInsets.only(top: 10),
                     child: AppBar(
@@ -37,35 +38,31 @@ class HomeView extends GetView<HomeController> {
                         style: TextStyle(fontFamily: "Kanit", fontSize: 16),
                       ),
                       centerTitle: true,
-                      leading: SizedBox(
-                        height: 100.0,
-                        width: 60.0,
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.menu,
-                              size: 30.0,
-                            )),
-                      ),
+                      leading: IconButton(
+                          onPressed: () {
+                            MainNav();
+                          },
+                          icon: Icon(
+                            Icons.menu,
+                            size: 30.0,
+                          )),
                       actions: [
                         SizedBox(
-                          height: 100.0,
-                          width: 60.0,
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.search,
-                                size: 30.0,
-                              )),
-                        )
+                            height: 100.0,
+                            width: 60.0,
+                            child: Icon(
+                              Icons.filter_list,
+                              size: 30.0,
+                            ))
                       ],
-                      bottom: TabBar(
-                          indicatorColor: Colors.white,
-                          indicatorPadding:
-                              EdgeInsets.only(right: 50, left: 50),
-                          tabs: myTab),
+                      // bottom: TabBar(
+                      //     indicatorColor: Colors.white,
+                      //     indicatorPadding:
+                      //         EdgeInsets.only(right: 50, left: 50),
+                      //     tabs: myTab),
                     ),
                   )),
+              drawer: MainNav(),
               body: TabBarView(children: [HariIniView(), BulanView()]))),
     );
   }
