@@ -10,15 +10,6 @@ import '../controllers/detail_aktivitas_controller.dart';
 
 // ignore: must_be_immutable
 class DetailAktivitasView extends GetView<DetailAktivitasController> {
-  List<String> kategori = [
-    "Concept",
-    "Design",
-    "Discuss",
-    "Learn",
-    "Report",
-    "Other"
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,8 +118,6 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     return ButtonKategori(
                       text: controller.listKategori[index].text,
                       onPress: () {
-                        // controller.listKategori[index].statusButton =
-                        //     !controller.listKategori[index].statusButton;
                         controller.fillBtnKategory[index].toggle();
                       },
                       stateValue: controller.fillBtnKategory[index],
