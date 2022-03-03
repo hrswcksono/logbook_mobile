@@ -88,8 +88,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                 width: Get.width,
                 height: 100,
                 color: Colors.white,
+                alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 15),
                   child: TextField(
                     decoration: InputDecoration(border: InputBorder.none),
                     maxLines: null,
@@ -146,9 +147,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                 ),
               ),
               ListSubAktivitasView(
-                  title: "Analisis", stateValue: controller.btnCheck),
+                  title: "Analisis", stateValue: controller.fillBtnSub[0]),
               ListSubAktivitasView(
-                  title: "Wireframe", stateValue: controller.btnCheck),
+                  title: "Wireframe", stateValue: controller.fillBtnSub[1]),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -172,108 +173,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               SizedBox(
                 height: 10,
               ),
-              PilihWaktuView(stateView: controller.btnCheck,)
-              // Column(
-              //   children: [
-              //     Container(
-              //       height: 55,
-              //       width: Get.width,
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(2),
-              //         border:
-              //             Border.all(color: Color.fromRGBO(201, 223, 251, 1)),
-              //       ),
-              //       child: Padding(
-              //         padding: EdgeInsets.all(10),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: [
-              //             Text(
-              //               "Pilih Waktu",
-              //               style: TextStyle(
-              //                   fontSize: 14,
-              //                   fontFamily: 'Kanit',
-              //                   fontWeight: FontWeight.bold),
-              //             ),
-              //             Image.asset(
-              //               'assets/icons/arrow_down.png',
-              //               width: 25,
-              //               fit: BoxFit.cover,
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //         decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.grey.withOpacity(0.5),
-              //               spreadRadius: 0.05,
-              //               blurRadius: 2,
-              //               offset: Offset(0, 3), // changes position of shadow
-              //             ),
-              //           ],
-              //         ),
-              //         width: Get.width,
-              //         child: Column(
-              //           children: [
-              //             Container(
-              //                 alignment: Alignment.centerLeft,
-              //                 color: Colors.white,
-              //                 height: 55,
-              //                 width: Get.width,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(10.0),
-              //                   child: Text(
-              //                     "Sebelum dhuhur",
-              //                     style: TextStyle(
-              //                         fontSize: 14, fontFamily: 'Kanit'),
-              //                   ),
-              //                 )),
-              //             Container(
-              //                 alignment: Alignment.centerLeft,
-              //                 color: Colors.white,
-              //                 height: 55,
-              //                 width: Get.width,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(10.0),
-              //                   child: Text(
-              //                     "Sebelum dhuhur",
-              //                     style: TextStyle(
-              //                         fontSize: 14, fontFamily: 'Kanit'),
-              //                   ),
-              //                 )),
-              //             Container(
-              //                 alignment: Alignment.centerLeft,
-              //                 color: Colors.white,
-              //                 height: 55,
-              //                 width: Get.width,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(10.0),
-              //                   child: Text(
-              //                     "Sebelum dhuhur",
-              //                     style: TextStyle(
-              //                         fontSize: 14, fontFamily: 'Kanit'),
-              //                   ),
-              //                 )),
-              //             Container(
-              //                 alignment: Alignment.centerLeft,
-              //                 color: Colors.white,
-              //                 height: 55,
-              //                 width: Get.width,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(10.0),
-              //                   child: Text(
-              //                     "Sebelum dhuhur",
-              //                     style: TextStyle(
-              //                         fontSize: 14, fontFamily: 'Kanit'),
-              //                   ),
-              //                 ))
-              //           ],
-              //         ))
-              //   ],
-              // ),
+              PilihWaktuView(
+                stateView: controller.btnWaktu,
+              ),
               SizedBox(
                 height: 15,
               ),

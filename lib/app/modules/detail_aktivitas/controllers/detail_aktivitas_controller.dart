@@ -8,6 +8,7 @@ class DetailAktivitasController extends GetxController with StateMixin {
   var btnCheck = false.obs;
   var listKategori = List<Kategori>.empty().obs;
   var btnKategori = false.obs;
+  var btnWaktu = true.obs;
 
   List<RxBool> fillBtnKategory = [
     false.obs,
@@ -17,6 +18,16 @@ class DetailAktivitasController extends GetxController with StateMixin {
     false.obs,
     false.obs
   ];
+
+  List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
+
+  List<String> waktuAktivitas = [
+    "Pilih Waktu",
+    "Sebelum Dzuhur",
+    "Setelah Dzuhur",
+    "Setelah Ashar",
+    "Overtime"
+  ].obs;
 
   List<String> kategori = [
     "Concept",

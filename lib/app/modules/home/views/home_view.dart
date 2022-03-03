@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           length: myTab.length,
           child: Scaffold(
               appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(100.0),
+                  preferredSize: Size.fromHeight(75.0),
                   child: Container(
                     margin: EdgeInsets.only(top: 10),
                     child: AppBar(
@@ -60,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                   )),
               drawer: MainNav(),
-              body: TabBarView(children: [HariIniView(), BulanView()]))),
+              body: HariIniView())),
     );
   }
 }
