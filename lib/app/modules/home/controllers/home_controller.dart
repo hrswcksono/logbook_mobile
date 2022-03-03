@@ -9,4 +9,10 @@ class HomeController extends GetxController with StateMixin {
   DateTime focusedDay = DateTime.now();
   CalendarFormat calendarFormat = CalendarFormat.month;
   DateTime? selectedDay;
+
+  List<CalendarFormat> formatCalendar = [
+    CalendarFormat.month,
+    CalendarFormat.twoWeeks,
+    CalendarFormat.week
+  ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/views/button_kategori.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/views/list_sub_aktivitas_view.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/views/pilih_waktu_view.dart';
@@ -179,33 +180,54 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 55,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
-                  border: Border.all(color: Color.fromRGBO(201, 223, 251, 1)),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Pilih Tanggal",
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Kanit',
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Image.asset(
-                        'assets/icons/calender.png',
-                        width: 25,
-                        fit: BoxFit.cover,
-                      )
-                    ],
-                  ),
-                ),
+              InkWell(
+                onTap: () {
+                  showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2030))
+                      .then((value) => {
+                            if (value != null)
+                              {
+                                controller.datePicker.value =
+                                    DateFormat.EEEE().format(value).toString() +
+                                        ", " +
+                                        DateFormat("dd MMMM yyyy")
+                                            .format(value)
+                                            .toString()
+                              }
+                          });
+                },
+                child: Container(
+                    height: 55,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border:
+                          Border.all(color: Color.fromRGBO(201, 223, 251, 1)),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Obx(() {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                controller.datePicker.value,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Kanit',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Image.asset(
+                                'assets/icons/calender.png',
+                                width: 25,
+                                fit: BoxFit.cover,
+                              )
+                            ],
+                          );
+                        }))),
               ),
             ],
           ),

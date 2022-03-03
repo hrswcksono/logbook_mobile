@@ -24,6 +24,9 @@ class HariIniView extends GetView<HomeController> {
               lastDay: DateTime(2050, 1, 13),
               focusedDay: DateTime.now(),
               calendarFormat: CalendarFormat.week,
+              onFormatChanged: (_) {
+                CalendarFormat.month;
+              },
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -63,7 +66,7 @@ class HariIniView extends GetView<HomeController> {
                 height: Get.height * 0.38,
                 alignment: Alignment.center,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
                       'assets/images/no_activity.png',

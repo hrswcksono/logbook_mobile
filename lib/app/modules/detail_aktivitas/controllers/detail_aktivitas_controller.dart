@@ -10,6 +10,8 @@ class DetailAktivitasController extends GetxController with StateMixin {
   var btnKategori = false.obs;
   var btnWaktu = true.obs;
 
+  RxString datePicker = "Pilih Tanggal".obs;
+
   List<RxBool> fillBtnKategory = [
     false.obs,
     false.obs,
