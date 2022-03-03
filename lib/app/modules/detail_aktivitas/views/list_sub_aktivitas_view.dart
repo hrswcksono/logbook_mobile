@@ -6,12 +6,12 @@ class ListSubAktivitasView extends GetView {
   ListSubAktivitasView({
     this.title,
     Key? key,
-    required this.onChange,
+    // required this.onChange,
     required this.stateValue,
   }) : super(key: key);
 
   final String? title;
-  final void Function() onChange;
+  // final void Function() onChange;
   final RxBool stateValue;
 
   @override
@@ -20,7 +20,7 @@ class ListSubAktivitasView extends GetView {
       // color: Colors.blueAccent,
       height: 70,
       child: Padding(
-        padding: const EdgeInsets.only(top: 5),
+        padding: const EdgeInsets.only(top: 0),
         child: Column(
           children: [
             Row(
@@ -53,20 +53,43 @@ class ListSubAktivitasView extends GetView {
                     )
                   ],
                 ),
-                Obx(
-                  () => Checkbox(
-                      value: stateValue.value,
-                      onChanged: (_) {
-                        onChange;
-                      }),
-                ),
-                Text(
-                  title!,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Kanit',
-                  ),
-                ),
+                Obx(() => AnimatedContainer(
+                    duration: Duration(milliseconds: 2000),
+                    curve: Curves.bounceInOut,
+                    child: stateValue.value
+                        ? Row(
+                            children: [
+                              Checkbox(
+                                  value: stateValue.value,
+                                  onChanged: (_) {
+                                    stateValue.toggle();
+                                  }),
+                              Text(
+                                title!,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'Kanit',
+                                    color: Color.fromRGBO(161, 161, 161, 1),
+                                    decoration: TextDecoration.lineThrough),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              Checkbox(
+                                  value: stateValue.value,
+                                  onChanged: (_) {
+                                    stateValue.toggle();
+                                  }),
+                              Text(
+                                title!,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'Kanit',
+                                ),
+                              ),
+                            ],
+                          ))),
               ],
             ),
             Divider(color: Color.fromRGBO(167, 205, 251, 1)),
