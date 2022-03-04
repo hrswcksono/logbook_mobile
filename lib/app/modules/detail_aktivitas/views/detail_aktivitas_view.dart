@@ -222,6 +222,24 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
           ),
         )),
       ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0, top: 0),
+        child: Container(
+          width: Get.width,
+          child: MaterialButton(
+            height: 60,
+            onPressed: () {
+              Get.toNamed('/detail-aktivitas');
+            },
+            color: Colors.blue,
+            child: Text(
+              "+ Tambah Aktivitas",
+              style: TextStyle(
+                  color: Colors.white, fontFamily: 'Kanit', fontSize: 18),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

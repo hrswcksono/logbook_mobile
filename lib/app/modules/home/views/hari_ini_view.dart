@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
-import 'package:logbook_mobile/app/modules/home/views/basics_example.dart';
+import 'package:logbook_mobile/app/modules/home/views/show_calendar.dart';
 import 'package:logbook_mobile/app/modules/home/views/item_list_view.dart';
 import 'package:table_calendar/table_calendar.dart';
 
