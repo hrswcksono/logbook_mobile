@@ -8,7 +8,6 @@ import 'package:logbook_mobile/app/util/main_drawer.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +31,52 @@ class HomeView extends GetView<HomeController> {
             ),
           );
         }),
+        actions: [
+          SizedBox(
+              height: 100.0,
+              width: 60.0,
+              child: InkWell(
+                onTap: (() async {
+                  await showMenu(
+                      context: context,
+                      position: RelativeRect.fromLTRB(
+                          Get.width, (Get.height - (Get.height - 70)), 20, 0),
+                      items: [
+                        PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            "Aktivitas Tertunda",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Kanit',
+                                color: Colors.black),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            "Aktivitas Selesai",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Kanit',
+                                color: Colors.black),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            "Aktivitas Semua",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Kanit',
+                                color: Colors.black),
+                          ),
+                        ),
+                      ]);
+                }),
+                child: Image.asset('assets/icons/mi_filter.png'),
+              ))
+        ],
       ),
       drawer: MainNav(),
       body: HariIniView(),

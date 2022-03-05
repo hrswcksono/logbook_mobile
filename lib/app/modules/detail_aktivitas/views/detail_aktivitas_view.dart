@@ -53,14 +53,18 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               ),
               Row(
                 children: [
-                  Obx(
-                    () => Checkbox(
-                        value: controller.btnCheck.value,
-                        onChanged: (_) {
-                          controller.btnCheck.toggle();
-                        }),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      color: Color.fromRGBO(229, 229, 229, 1),
+                    ),
                   ),
-                  Text("Judul")
+                  Text(
+                    "Judul",
+                    style: TextStyle(fontSize: 23, fontFamily: "Kanit"),
+                  )
                 ],
               ),
               Align(
