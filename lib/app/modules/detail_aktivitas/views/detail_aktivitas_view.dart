@@ -8,7 +8,6 @@ import 'package:logbook_mobile/app/modules/detail_aktivitas/views/pilih_waktu_vi
 
 import '../controllers/detail_aktivitas_controller.dart';
 
-// ignore: must_be_immutable
 class DetailAktivitasView extends GetView<DetailAktivitasController> {
   @override
   Widget build(BuildContext context) {
@@ -112,6 +111,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               GridView.builder(
                   shrinkWrap: true,
                   itemCount: 6,
+                  physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 2.5,
@@ -122,7 +122,12 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     return ButtonKategori(
                       text: controller.listKategori[index].text,
                       onPress: () {
-                        controller.fillBtnKategory[index].toggle();
+                        if (controller.fillBtnKategory[index].value == true) {
+                          controller.onBtnKategori();
+                        } else {
+                          controller.onBtnKategori();
+                          controller.fillBtnKategory[index].toggle();
+                        }
                       },
                       stateValue: controller.fillBtnKategory[index],
                     );
@@ -140,10 +145,20 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(174, 174, 174, 1)),
                 ),
               ),
-              ListSubAktivitasView(
-                  title: "Analisis", stateValue: controller.fillBtnSub[0]),
-              ListSubAktivitasView(
-                  title: "Wireframe", stateValue: controller.fillBtnSub[1]),
+              ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 2,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListSubAktivitasView(
+                        title: "Analisis",
+                        stateValue: controller.fillBtnSub[0]);
+                  }),
+              // ListSubAktivitasView(
+              //     title: "Analisis", stateValue: controller.fillBtnSub[0]),
+              // ListSubAktivitasView(
+              //     title: "Wireframe", stateValue: controller.fillBtnSub[1]),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -222,27 +237,32 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                           );
                         }))),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.all(0),
+                child: Container(
+                  width: Get.width,
+                  child: MaterialButton(
+                    height: 60,
+                    onPressed: () {
+                      Get.toNamed('/detail-aktivitas');
+                    },
+                    color: Colors.blue,
+                    child: Text(
+                      "Simpan Aktivitas",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Kanit',
+                          fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         )),
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0, top: 0),
-        child: Container(
-          width: Get.width,
-          child: MaterialButton(
-            height: 60,
-            onPressed: () {
-              Get.toNamed('/detail-aktivitas');
-            },
-            color: Colors.blue,
-            child: Text(
-              "+ Tambah Aktivitas",
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Kanit', fontSize: 18),
-            ),
-          ),
-        ),
       ),
     );
   }

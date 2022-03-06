@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:logbook_mobile/app/modules/home/views/bulan_view.dart';
+// import 'package:logbook_mobile/app/modules/home/views/bulan_view.dart';
 import 'package:logbook_mobile/app/modules/home/views/hari_ini_view.dart';
 import 'package:logbook_mobile/app/util/main_drawer.dart';
 
@@ -74,7 +74,10 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ]);
                 }),
-                child: Image.asset('assets/icons/mi_filter.png'),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Image.asset('assets/icons/mi_filter.png'),
+                ),
               ))
         ],
       ),
