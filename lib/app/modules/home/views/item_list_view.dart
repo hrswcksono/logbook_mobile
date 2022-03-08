@@ -29,10 +29,14 @@ class ItemListView extends GetView<HomeController> {
       child: Column(
         children: [
           Obx(() => AnimatedContainer(
-                duration: Duration(milliseconds: 2000),
-                curve: Curves.bounceInOut,
-                child: stateValue.value
-                    ? Row(
+              duration: Duration(milliseconds: 2000),
+              curve: Curves.bounceInOut,
+              child: stateValue.value
+                  ? InkWell(
+                      onTap: (() {
+                        stateValue.toggle();
+                      }),
+                      child: Row(
                         children: [
                           Checkbox(
                               value: stateValue.value,
@@ -48,8 +52,13 @@ class ItemListView extends GetView<HomeController> {
                                 decoration: TextDecoration.lineThrough),
                           ),
                         ],
-                      )
-                    : Row(
+                      ),
+                    )
+                  : InkWell(
+                      onTap: (() {
+                        stateValue.toggle();
+                      }),
+                      child: Row(
                         children: [
                           Checkbox(
                               value: stateValue.value,
@@ -65,7 +74,7 @@ class ItemListView extends GetView<HomeController> {
                           ),
                         ],
                       ),
-              )),
+                    ))),
           Padding(
             padding: const EdgeInsets.only(left: 30, bottom: 15, right: 10),
             child: Column(

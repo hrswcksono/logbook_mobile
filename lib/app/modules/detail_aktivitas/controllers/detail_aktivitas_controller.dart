@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import '../kategori_model.dart';
 
 class DetailAktivitasController extends GetxController with StateMixin {
-  //TODO: Implement DetailAktivitasController
-
   var btnCheck = false.obs;
   var listKategori = List<Kategori>.empty().obs;
   var btnKategori = false.obs;
@@ -20,14 +18,7 @@ class DetailAktivitasController extends GetxController with StateMixin {
     }
   }
 
-  List<RxBool> fillBtnKategory = [
-    false.obs,
-    false.obs,
-    false.obs,
-    false.obs,
-    false.obs,
-    false.obs
-  ];
+  List<RxBool> fillBtnKategory = [];
 
   List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
 
@@ -57,7 +48,14 @@ class DetailAktivitasController extends GetxController with StateMixin {
     listKategori.add(Kategori(kategori[4], false));
     listKategori.add(Kategori(kategori[5], false));
 
+    addIndexButtonKategori(listKategori.length);
     super.onInit();
+  }
+
+  void addIndexButtonKategori(int input) {
+    for (var x = 0; x < input; x++) {
+      fillBtnKategory.insert(x, false.obs);
+    }
   }
 
   var listWaktu = [

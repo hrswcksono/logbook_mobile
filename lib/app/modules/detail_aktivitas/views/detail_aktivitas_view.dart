@@ -60,10 +60,20 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(229, 229, 229, 1),
                     ),
                   ),
-                  Text(
-                    "Judul",
-                    style: TextStyle(fontSize: 23, fontFamily: "Kanit"),
-                  )
+                  // Text(
+                  //   "Judul",
+                  //   style: TextStyle(fontSize: 23, fontFamily: "Kanit"),
+                  // )
+                  Container(
+                    width: Get.width * 0.80,
+                    height: 40,
+                    color: Colors.white,
+                    alignment: Alignment.centerLeft,
+                    child: TextField(
+                      decoration: InputDecoration(border: InputBorder.none),
+                      maxLines: 1,
+                    ),
+                  ),
                 ],
               ),
               Align(
@@ -153,12 +163,8 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   itemBuilder: (BuildContext context, int index) {
                     return ListSubAktivitasView(
                         title: "Analisis",
-                        stateValue: controller.fillBtnSub[0]);
+                        stateValue: controller.fillBtnSub[index]);
                   }),
-              // ListSubAktivitasView(
-              //     title: "Analisis", stateValue: controller.fillBtnSub[0]),
-              // ListSubAktivitasView(
-              //     title: "Wireframe", stateValue: controller.fillBtnSub[1]),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

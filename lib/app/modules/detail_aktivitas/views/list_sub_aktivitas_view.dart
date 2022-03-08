@@ -54,42 +54,52 @@ class ListSubAktivitasView extends GetView {
                   ],
                 ),
                 Obx(() => AnimatedContainer(
-                    duration: Duration(milliseconds: 2000),
-                    curve: Curves.bounceInOut,
-                    child: stateValue.value
-                        ? Row(
-                            children: [
-                              Checkbox(
-                                  value: stateValue.value,
-                                  onChanged: (_) {
-                                    stateValue.toggle();
-                                  }),
-                              Text(
-                                title!,
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'Kanit',
-                                    color: Color.fromRGBO(161, 161, 161, 1),
-                                    decoration: TextDecoration.lineThrough),
+                      duration: Duration(milliseconds: 2000),
+                      curve: Curves.bounceInOut,
+                      child: stateValue.value
+                          ? InkWell(
+                              onTap: (() {
+                                stateValue.toggle();
+                              }),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                      value: stateValue.value,
+                                      onChanged: (_) {
+                                        stateValue.toggle();
+                                      }),
+                                  Text(
+                                    title!,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'Kanit',
+                                        color: Color.fromRGBO(161, 161, 161, 1),
+                                        decoration: TextDecoration.lineThrough),
+                                  ),
+                                ],
                               ),
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              Checkbox(
-                                  value: stateValue.value,
-                                  onChanged: (_) {
-                                    stateValue.toggle();
-                                  }),
-                              Text(
-                                title!,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'Kanit',
-                                ),
-                              ),
-                            ],
-                          ))),
+                            )
+                          : InkWell(
+                              onTap: (() {
+                                stateValue.toggle();
+                              }),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                      value: stateValue.value,
+                                      onChanged: (_) {
+                                        stateValue.toggle();
+                                      }),
+                                  Text(
+                                    title!,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'Kanit',
+                                    ),
+                                  ),
+                                ],
+                              )),
+                    )),
               ],
             ),
             Divider(color: Color.fromRGBO(167, 205, 251, 1)),
