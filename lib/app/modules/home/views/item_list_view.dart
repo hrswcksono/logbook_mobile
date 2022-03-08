@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
 
-class ItemListView extends GetView<HomeController> {
+class ItemListView extends GetView {
   ItemListView({
     this.title,
     this.description,

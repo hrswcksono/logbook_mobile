@@ -133,9 +133,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       text: controller.listKategori[index].text,
                       onPress: () {
                         if (controller.fillBtnKategory[index].value == true) {
-                          controller.onBtnKategori();
+                          controller.onBtnState(1);
                         } else {
-                          controller.onBtnKategori();
+                          controller.onBtnState(1);
                           controller.fillBtnKategory[index].toggle();
                         }
                       },
@@ -165,14 +165,30 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                         title: "Analisis",
                         stateValue: controller.fillBtnSub[index]);
                   }),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "+ Tambah Sub-Aktivitas",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Kanit',
-                      color: Color.fromRGBO(174, 174, 174, 1)),
+              InkWell(
+                onTap: (() {
+                  Get.defaultDialog(
+                      title: "Input",
+                      middleText: "Hello world!",
+                      backgroundColor: Colors.white,
+                      titleStyle: TextStyle(color: Colors.black),
+                      middleTextStyle: TextStyle(color: Colors.black),
+                      content: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                      ));
+                }),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "+ Tambah Sub-Aktivitas",
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Kanit',
+                        color: Color.fromRGBO(174, 174, 174, 1)),
+                  ),
                 ),
               ),
               Align(
