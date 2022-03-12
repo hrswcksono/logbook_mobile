@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:get/get.dart';
 import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
@@ -67,16 +68,34 @@ class ListAktivitasView extends GetView<HomeController> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: controller.listAktivitas.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ItemListView(
-                      title: controller.listAktivitas[index].judul,
-                      description: controller.listAktivitas[index].realita,
-                      waktu: controller.listAktivitas[index].waktu,
-                      tipe: controller.listAktivitas[index].kategory,
-                      // onTap: () {
-                      //   controller.btnCheckBox.toggle();
-                      // },
-                      stateValue: controller.btnCheckBox,
-                    );
+                    return Slidable(
+                        endActionPane:
+                            ActionPane(motion: ScrollMotion(), children: [
+                          SlidableAction(
+                            onPressed: (context) {},
+                            icon: Icons.edit,
+                            backgroundColor: Colors.amber,
+                            foregroundColor: Colors.white,
+                            label: "Edit",
+                          ),
+                          SlidableAction(
+                            onPressed: (context) {},
+                            icon: Icons.delete,
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            label: "Delete",
+                          ),
+                        ]),
+                        child: ItemListView(
+                          title: controller.listAktivitas[index].judul,
+                          description: controller.listAktivitas[index].realita,
+                          waktu: controller.listAktivitas[index].waktu,
+                          tipe: controller.listAktivitas[index].kategory,
+                          // onTap: () {
+                          //   controller.btnCheckBox.toggle();
+                          // },
+                          stateValue: controller.btnCheckBox,
+                        ));
                   });
         }))
       ],

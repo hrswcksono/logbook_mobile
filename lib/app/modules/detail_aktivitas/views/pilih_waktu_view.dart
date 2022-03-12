@@ -134,6 +134,8 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[2];
                                   stateView.toggle();
+                                  controller.onWaktuSelected =
+                                      controller.waktuAktivitas[2];
                                 }),
                                 child: Container(
                                     alignment: Alignment.centerLeft,
@@ -154,6 +156,8 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[3];
                                   stateView.toggle();
+                                  controller.onWaktuSelected =
+                                      controller.waktuAktivitas[3];
                                 }),
                                 child: Container(
                                     alignment: Alignment.centerLeft,
@@ -174,6 +178,8 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[4];
                                   stateView.toggle();
+                                  controller.onWaktuSelected =
+                                      controller.waktuAktivitas[4];
                                 }),
                                 child: Container(
                                     alignment: Alignment.centerLeft,

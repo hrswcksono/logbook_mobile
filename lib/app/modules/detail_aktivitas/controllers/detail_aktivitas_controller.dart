@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logbook_mobile/app/modules/detail_aktivitas/providers/detail_log_provider.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/sub_aktivitas_model.dart';
 
 import '../kategori_model.dart';
@@ -9,6 +11,21 @@ class DetailAktivitasController extends GetxController with StateMixin {
   var listSubAktivitas = List<SubAktivitas>.empty().obs;
   var btnKategori = false.obs;
   var btnWaktu = true.obs;
+  List<RxBool> fillBtnKategory = [];
+  List<RxBool> fillBtnSubAktivitas = [];
+  List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
+
+  var kategoryFill = "".obs;
+
+  DetailLogProvider lgp = Get.put(DetailLogProvider());
+
+  late TextEditingController targetController;
+  late TextEditingController realitaController;
+  late String onWaktuSelected;
+  late String onKategoriSelected;
+  late String onSubAktivitasSelected;
+
+  List<RxString> fillDetail = [];
 
   RxString datePicker = "Pilih Tanggal".obs;
 
@@ -28,11 +45,6 @@ class DetailAktivitasController extends GetxController with StateMixin {
     }
   }
 
-  List<RxBool> fillBtnKategory = [];
-  List<RxBool> fillBtnSubAktivitas = [];
-
-  List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
-
   List<String> waktuAktivitas = [
     "Pilih Waktu",
     "Sebelum Dzuhur",
@@ -41,17 +53,17 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Overtime"
   ].obs;
 
-  List<String> kategori = [
-    "Concept",
-    "Design",
-    "Discuss",
-    "Learn",
-    "Report",
-    "Other"
-  ];
+  List<String> kategori =
+      ["Concept", "Design", "Discuss", "Learn", "Report", "Other", ""].obs;
 
   @override
   void onInit() {
+    targetController = TextEditingController();
+    realitaController = TextEditingController();
+    onWaktuSelected = "";
+    onKategoriSelected = "";
+    onSubAktivitasSelected = "";
+
     listKategori.add(Kategori(kategori[0], false));
     listKategori.add(Kategori(kategori[1], false));
     listKategori.add(Kategori(kategori[2], false));
@@ -81,4 +93,27 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Setelah Ashar",
     "Overtime",
   ];
+
+  void addLogBook() {
+    try {
+      lgp
+          .addLogBook(
+              targetController.text,
+              kategori[6],
+              realitaController.text,
+              waktuAktivitas[0],
+              "note",
+              datePicker.toString())
+          .then((value) {
+        change(value, status: RxStatus.success());
+        print(value.name);
+        Get.toNamed('/home');
+      }, onError: (err) {
+        print(err.toString());
+        print("object");
+      });
+    } catch (err) {
+      print("err");
+    } finally {}
+  }
 }

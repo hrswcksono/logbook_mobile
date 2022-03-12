@@ -9,10 +9,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.1
   intl: ^0.17.0
-
+  get_storage: ^2.0.3
   table_calendar: ^3.0.4
   flutter: 
     sdk: flutter
+  flutter_slidable: ^1.2.0
 
 dev_dependencies: 
   flutter_lints: ^1.0.0

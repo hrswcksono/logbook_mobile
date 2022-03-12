@@ -70,6 +70,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     color: Colors.white,
                     alignment: Alignment.centerLeft,
                     child: TextField(
+                      controller: controller.targetController,
                       decoration: InputDecoration(border: InputBorder.none),
                       maxLines: 1,
                     ),
@@ -97,6 +98,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: TextField(
+                    controller: controller.realitaController,
                     decoration: InputDecoration(border: InputBorder.none),
                     maxLines: null,
                   ),
@@ -134,9 +136,12 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       onPress: () {
                         if (controller.fillBtnKategory[index].value == true) {
                           controller.onBtnState(1);
+                          controller.kategori[6] = "";
                         } else {
                           controller.onBtnState(1);
                           controller.fillBtnKategory[index].toggle();
+                          controller.kategori[6] = controller.kategori[index];
+                          print(controller.kategori[6]);
                         }
                       },
                       stateValue: controller.fillBtnKategory[index],
@@ -269,7 +274,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   child: MaterialButton(
                     height: 60,
                     onPressed: () {
-                      Get.toNamed('/detail-aktivitas');
+                      // Get.toNamed('/detail-aktivitas');
+                      controller.addLogBook();
+                      controller.kategori[6] = "";
                     },
                     color: Colors.blue,
                     child: Text(

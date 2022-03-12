@@ -5,6 +5,7 @@ class MainNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+        child: SafeArea(
       child: Column(
         children: [
           Container(
@@ -33,6 +34,7 @@ class MainNav extends StatelessWidget {
           ListTile(
             onTap: () {
               Get.back();
+              Get.toNamed('/home');
             },
             leading: SizedBox(
                 height: 30,
@@ -46,6 +48,7 @@ class MainNav extends StatelessWidget {
           ListTile(
             onTap: () {
               Get.back();
+              Get.toNamed('/kategory');
             },
             leading: SizedBox(
                 height: 30,
@@ -69,6 +72,6 @@ class MainNav extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
+import 'package:logbook_mobile/app/modules/home/controllers/listhome_controller.dart';
 import 'package:logbook_mobile/app/modules/home/views/list_aktivitas_view.dart';
 import 'package:logbook_mobile/app/modules/home/views/show_calendar.dart';
 import 'package:logbook_mobile/app/modules/home/views/item_list_view.dart';
@@ -27,6 +28,7 @@ class HariIniView extends GetView<HomeController> {
           height: 60,
           onPressed: () {
             Get.toNamed('/detail-aktivitas');
+            // controller.fetchDataLogbook();
           },
           color: Colors.blue,
           child: Text(

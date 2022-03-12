@@ -38,6 +38,7 @@ class HomeView extends GetView<HomeController> {
               child: InkWell(
                 onTap: (() async {
                   await showMenu(
+                      useRootNavigator: true,
                       context: context,
                       position: RelativeRect.fromLTRB(
                           Get.width, (Get.height - (Get.height - 70)), 20, 0),
