@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:logbook_mobile/app/modules/aktivitas_model.dart';
+import 'package:logbook_mobile/app/data/aktivitas_model.dart';
 import 'package:logbook_mobile/app/modules/home/providers/logs_provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 

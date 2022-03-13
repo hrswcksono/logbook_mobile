@@ -24,7 +24,10 @@ class ButtonKategori extends GetView<DetailAktivitasController> {
             curve: Curves.bounceIn,
             child: stateValue.value
                 ? InkWell(
-                    onTap: onPress,
+                    onTap: (() {
+                      onPress;
+                      // print(onPress);
+                    }),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(80, 155, 248, 1),

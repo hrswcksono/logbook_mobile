@@ -35,8 +35,6 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       fontFamily: 'Kanit',
                     ),
                   ),
-                  // },
-                  // ),
                 ],
               ),
               SizedBox(
@@ -63,16 +61,23 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     ),
                   ),
                   Container(
-                    width: Get.width * 0.80,
-                    height: 40,
-                    color: Colors.white,
-                    alignment: Alignment.centerLeft,
-                    child: TextField(
-                      controller: controller.targetController,
-                      decoration: InputDecoration(border: InputBorder.none),
-                      maxLines: 1,
-                    ),
-                  ),
+                      width: Get.width * 0.80,
+                      height: 40,
+                      color: Colors.white,
+                      alignment: Alignment.centerLeft,
+                      child: controller.handlingView.value
+                          ? controller.obx((state) => TextField(
+                                controller: controller.targetController,
+                                decoration:
+                                    InputDecoration(border: InputBorder.none),
+                                maxLines: 1,
+                              ))
+                          : TextField(
+                              controller: controller.targetController,
+                              decoration:
+                                  InputDecoration(border: InputBorder.none),
+                              maxLines: 1,
+                            )),
                 ],
               ),
               Align(
@@ -94,13 +99,20 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                 color: Colors.white,
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: TextField(
-                    controller: controller.realitaController,
-                    decoration: InputDecoration(border: InputBorder.none),
-                    maxLines: null,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 15),
+                    child: controller.handlingView.value
+                        ? controller.obx((state) => TextField(
+                              controller: controller.realitaController,
+                              decoration:
+                                  InputDecoration(border: InputBorder.none),
+                              maxLines: null,
+                            ))
+                        : TextField(
+                            controller: controller.realitaController,
+                            decoration:
+                                InputDecoration(border: InputBorder.none),
+                            maxLines: null,
+                          )),
               ),
               SizedBox(
                 height: 15,
@@ -132,15 +144,16 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                     return ButtonKategori(
                       text: controller.listKategori[index].text,
                       onPress: () {
+                        print(controller.fillBtnKategory);
                         if (controller.fillBtnKategory[index].value == true) {
                           controller.onBtnState(1);
-                          controller.onKategoriSelected = "";
+                          controller.onKategoriSelected.value = "";
                         } else {
                           controller.onBtnState(1);
                           controller.fillBtnKategory[index].toggle();
-                          controller.onKategoriSelected =
+                          controller.onKategoriSelected.value =
                               controller.kategori[index];
-                          print(controller.onKategoriSelected);
+                          // print(controller.fillBtnKategory);
                         }
                       },
                       stateValue: controller.fillBtnKategory[index],
@@ -273,7 +286,13 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   child: MaterialButton(
                     height: 60,
                     onPressed: () {
-                      controller.addLogBook();
+                      if (Get.parameters['id'] == 'detail') {
+                        controller.addLogBook();
+                      } else {
+                        controller
+                            .updateLogBook(Get.parameters['id'].toString());
+                      }
+                      Get.offNamed('/home');
                     },
                     color: Colors.blue,
                     child: Text(

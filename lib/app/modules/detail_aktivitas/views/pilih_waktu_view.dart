@@ -38,7 +38,7 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  controller.onWaktuSelected,
+                                  controller.onWaktuSelected.value,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: 'Kanit',
@@ -134,7 +134,7 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[2];
                                   stateView.toggle();
-                                  controller.onWaktuSelected =
+                                  controller.onWaktuSelected.value =
                                       controller.waktuAktivitas[2];
                                 }),
                                 child: Container(
@@ -156,7 +156,7 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[3];
                                   stateView.toggle();
-                                  controller.onWaktuSelected =
+                                  controller.onWaktuSelected.value =
                                       controller.waktuAktivitas[3];
                                 }),
                                 child: Container(
@@ -178,7 +178,7 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                                   controller.waktuAktivitas[0] =
                                       controller.waktuAktivitas[4];
                                   stateView.toggle();
-                                  controller.onWaktuSelected =
+                                  controller.onWaktuSelected.value =
                                       controller.waktuAktivitas[4];
                                 }),
                                 child: Container(

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logbook_mobile/app/modules/aktivitas_model.dart';
+import 'package:logbook_mobile/app/data/aktivitas_model.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/providers/detail_log_provider.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/sub_aktivitas_model.dart';
 
 import '../kategori_model.dart';
 
-class DetailAktivitasController extends GetxController
-    with StateMixin<AktivitasModel> {
+class DetailAktivitasController extends GetxController with StateMixin {
   var btnCheck = false.obs;
   var listKategori = List<Kategori>.empty().obs;
   var listSubAktivitas = List<SubAktivitas>.empty().obs;
@@ -26,13 +25,16 @@ class DetailAktivitasController extends GetxController
 
   late TextEditingController targetController;
   late TextEditingController realitaController;
-  late String onWaktuSelected;
-  late String onKategoriSelected;
-  late String onSubAktivitasSelected;
+  RxString onWaktuSelected = "".obs;
+  RxString onKategoriSelected = "".obs;
+  RxString onSubAktivitasSelected = "".obs;
+  RxString datePicker = "".obs;
+  RxString targetS = "".obs;
+  RxString realityS = "".obs;
+
+  var handlingView = false.obs;
 
   List<RxString> fillDetail = [];
-
-  RxString datePicker = "Pilih Tanggal".obs;
 
   void onBtnState(int temp) {
     if (temp == 1) {
@@ -61,27 +63,31 @@ class DetailAktivitasController extends GetxController
   List<String> kategori =
       ["Concept", "Design", "Discuss", "Learn", "Report", "Other"].obs;
 
+  void refreshButton() {
+    onWaktuSelected.value = waktuAktivitas[0];
+    datePicker.value = "Pilih Tanggal";
+  }
+
   @override
   void onInit() {
-    targetController = TextEditingController();
-    realitaController = TextEditingController();
-    onWaktuSelected = "Pilih Waktu";
-    onKategoriSelected = "";
-    onSubAktivitasSelected = "";
-
+    if (Get.parameters['id'] != "detail") {
+      show(Get.parameters['id'].toString());
+      handlingView = true.obs;
+      print(Get.parameters['id'].toString());
+    } else {
+      handlingView = false.obs;
+      refreshButton();
+    }
+    targetController = TextEditingController(text: targetS.value);
+    realitaController = TextEditingController(text: realityS.value);
+    onWaktuSelected.value = waktuAktivitas[0];
+    datePicker.value = "Pilih Tanggal";
     listKategori.add(Kategori(kategori[0], false));
     listKategori.add(Kategori(kategori[1], false));
     listKategori.add(Kategori(kategori[2], false));
     listKategori.add(Kategori(kategori[3], false));
     listKategori.add(Kategori(kategori[4], false));
     listKategori.add(Kategori(kategori[5], false));
-
-    // show("-Mxwx6vmUwgdhMXDzEv1");
-
-    if (Get.parameters['id'] != "detail") {
-      show(Get.parameters['id'].toString());
-    }
-
     addBtnState(1);
     super.onInit();
   }
@@ -105,14 +111,39 @@ class DetailAktivitasController extends GetxController
     "Overtime",
   ];
 
+  void updateLogBook(String id) {
+    try {
+      lgp
+          .editLogBook(
+              id,
+              targetController.text,
+              onKategoriSelected.toString(),
+              realitaController.text,
+              onWaktuSelected.toString(),
+              "note",
+              datePicker.value)
+          .then((value) {});
+    } catch (e) {
+      print(e);
+    }
+  }
+
   void show(String id) {
     try {
       lgp.showLogBook(id).then((value) {
         for (var data in value.logs) {
-          change(
-              AktivitasModel(id, data.isDone, data.target, data.reality,
-                  data.category, ["subAktivitas"], data.time, value.timestamp),
-              status: RxStatus.success());
+          // change(
+          //     AktivitasModel(id, data.isDone, data.target, data.reality,
+          //         data.category, ["subAktivitas"], data.time, value.timestamp),
+          //     status: RxStatus.success());
+          targetController.text = data.target;
+          realitaController.text = data.reality;
+          onWaktuSelected.value = data.time;
+          onKategoriSelected.value = data.category;
+          onSubAktivitasSelected.value = "";
+          datePicker.value = value.timestamp;
+          fillBtnKategory[0] = false.obs;
+          change(null, status: RxStatus.success());
         }
         // print(value.logs);
       });
@@ -126,14 +157,13 @@ class DetailAktivitasController extends GetxController
       lgp
           .addLogBook(
               targetController.text,
-              onKategoriSelected,
+              onKategoriSelected.toString(),
               realitaController.text,
-              onWaktuSelected,
+              onWaktuSelected.toString(),
               "note",
               datePicker.toString())
           .then((value) {
         print(value.name);
-        Get.toNamed('/home');
       }, onError: (err) {
         print(err.toString());
         print("object");
@@ -141,5 +171,10 @@ class DetailAktivitasController extends GetxController
     } catch (err) {
       print("err");
     } finally {}
+  }
+
+  @override
+  void onClose() {
+    Get.offNamed('home');
   }
 }

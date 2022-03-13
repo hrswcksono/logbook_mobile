@@ -8,6 +8,30 @@ import '../log_model.dart';
 class DetailLogProvider extends GetConnect {
   final url = "https://logbook-aa225-default-rtdb.firebaseio.com";
 
+  Future<LogBookModel> editLogBook(String id, String target, String category,
+      String reality, String time, String note, String timestamp) async {
+    final body = json.encode({
+      "timestamp": timestamp,
+      "logs": [
+        {
+          "target": target,
+          "category": category,
+          "reality": reality,
+          "time": time,
+          "note": note,
+          "is_done": false
+        }
+      ]
+    });
+    final response = await put(url + "/logs/" + id + ".json", body);
+    if (response.status.hasError) {
+      return Future.error(response.statusText.toString());
+    } else {
+      print(response);
+      return logBookModelFromJson(response.bodyString.toString());
+    }
+  }
+
   Future<LogBookModel> showLogBook(String id) async {
     final response = await get(url + "/logs/" + id + ".json");
 
