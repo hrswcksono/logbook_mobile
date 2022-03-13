@@ -38,7 +38,7 @@ class PilihWaktuView extends GetView<DetailAktivitasController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  controller.waktuAktivitas[0],
+                                  controller.onWaktuSelected,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: 'Kanit',

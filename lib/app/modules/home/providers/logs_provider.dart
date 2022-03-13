@@ -10,7 +10,11 @@ class LogsProvider extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText.toString());
     } else {
-      return listLogModelFromJson(response.bodyString.toString());
+      if (response.body.toString() == "null") {
+        return {};
+      } else {
+        return listLogModelFromJson(response.bodyString.toString());
+      }
     }
   }
 

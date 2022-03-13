@@ -6,8 +6,6 @@ import 'package:logbook_mobile/app/modules/home/bindings/home_binding.dart';
 import 'package:logbook_mobile/app/modules/home/views/home_view.dart';
 import 'package:logbook_mobile/app/modules/kategory/bindings/kategory_binding.dart';
 import 'package:logbook_mobile/app/modules/kategory/views/kategory_view.dart';
-import 'package:logbook_mobile/app/modules/show_and_edit/bindings/show_and_edit_binding.dart';
-import 'package:logbook_mobile/app/modules/show_and_edit/views/show_and_edit_view.dart';
 
 part 'app_routes.dart';
 
@@ -26,11 +24,6 @@ class AppPages {
       name: _Paths.DETAIL_AKTIVITAS,
       page: () => DetailAktivitasView(),
       binding: DetailAktivitasBinding(),
-    ),
-    GetPage(
-      name: _Paths.SHOW_AND_EDIT,
-      page: () => ShowAndEditView(),
-      binding: ShowAndEditBinding(),
     ),
     GetPage(
       name: _Paths.KATEGORY,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logbook_mobile/app/modules/aktivitas_model.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/providers/detail_log_provider.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/sub_aktivitas_model.dart';
 
 import '../kategori_model.dart';
 
-class DetailAktivitasController extends GetxController with StateMixin {
+class DetailAktivitasController extends GetxController
+    with StateMixin<AktivitasModel> {
   var btnCheck = false.obs;
   var listKategori = List<Kategori>.empty().obs;
   var listSubAktivitas = List<SubAktivitas>.empty().obs;
@@ -14,6 +16,9 @@ class DetailAktivitasController extends GetxController with StateMixin {
   List<RxBool> fillBtnKategory = [];
   List<RxBool> fillBtnSubAktivitas = [];
   List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
+  var aktivitasModel = AktivitasModel;
+
+  var handlePageDetail = "".obs;
 
   var kategoryFill = "".obs;
 
@@ -54,13 +59,13 @@ class DetailAktivitasController extends GetxController with StateMixin {
   ].obs;
 
   List<String> kategori =
-      ["Concept", "Design", "Discuss", "Learn", "Report", "Other", ""].obs;
+      ["Concept", "Design", "Discuss", "Learn", "Report", "Other"].obs;
 
   @override
   void onInit() {
     targetController = TextEditingController();
     realitaController = TextEditingController();
-    onWaktuSelected = "";
+    onWaktuSelected = "Pilih Waktu";
     onKategoriSelected = "";
     onSubAktivitasSelected = "";
 
@@ -70,6 +75,12 @@ class DetailAktivitasController extends GetxController with StateMixin {
     listKategori.add(Kategori(kategori[3], false));
     listKategori.add(Kategori(kategori[4], false));
     listKategori.add(Kategori(kategori[5], false));
+
+    // show("-Mxwx6vmUwgdhMXDzEv1");
+
+    if (Get.parameters['id'] != "detail") {
+      show(Get.parameters['id'].toString());
+    }
 
     addBtnState(1);
     super.onInit();
@@ -94,18 +105,33 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Overtime",
   ];
 
+  void show(String id) {
+    try {
+      lgp.showLogBook(id).then((value) {
+        for (var data in value.logs) {
+          change(
+              AktivitasModel(id, data.isDone, data.target, data.reality,
+                  data.category, ["subAktivitas"], data.time, value.timestamp),
+              status: RxStatus.success());
+        }
+        // print(value.logs);
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   void addLogBook() {
     try {
       lgp
           .addLogBook(
               targetController.text,
-              kategori[6],
+              onKategoriSelected,
               realitaController.text,
-              waktuAktivitas[0],
+              onWaktuSelected,
               "note",
               datePicker.toString())
           .then((value) {
-        change(value, status: RxStatus.success());
         print(value.name);
         Get.toNamed('/home');
       }, onError: (err) {

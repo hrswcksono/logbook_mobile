@@ -1,12 +1,13 @@
 class AktivitasModel {
+  String id;
   bool selesai;
   String judul;
   String realita;
   String kategory;
   List<String> subAktivitas;
   String waktu;
-  DateTime tanggal;
+  String tanggal;
 
-  AktivitasModel(this.selesai, this.judul, this.realita, this.kategory,
+  AktivitasModel(this.id, this.selesai, this.judul, this.realita, this.kategory,
       this.subAktivitas, this.waktu, this.tanggal);
 }

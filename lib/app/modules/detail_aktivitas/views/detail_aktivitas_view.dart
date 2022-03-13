@@ -34,7 +34,9 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       fontSize: 24,
                       fontFamily: 'Kanit',
                     ),
-                  )
+                  ),
+                  // },
+                  // ),
                 ],
               ),
               SizedBox(
@@ -60,10 +62,6 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       color: Color.fromRGBO(229, 229, 229, 1),
                     ),
                   ),
-                  // Text(
-                  //   "Judul",
-                  //   style: TextStyle(fontSize: 23, fontFamily: "Kanit"),
-                  // )
                   Container(
                     width: Get.width * 0.80,
                     height: 40,
@@ -136,12 +134,13 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                       onPress: () {
                         if (controller.fillBtnKategory[index].value == true) {
                           controller.onBtnState(1);
-                          controller.kategori[6] = "";
+                          controller.onKategoriSelected = "";
                         } else {
                           controller.onBtnState(1);
                           controller.fillBtnKategory[index].toggle();
-                          controller.kategori[6] = controller.kategori[index];
-                          print(controller.kategori[6]);
+                          controller.onKategoriSelected =
+                              controller.kategori[index];
+                          print(controller.onKategoriSelected);
                         }
                       },
                       stateValue: controller.fillBtnKategory[index],
@@ -274,9 +273,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
                   child: MaterialButton(
                     height: 60,
                     onPressed: () {
-                      // Get.toNamed('/detail-aktivitas');
                       controller.addLogBook();
-                      controller.kategori[6] = "";
                     },
                     color: Colors.blue,
                     child: Text(
