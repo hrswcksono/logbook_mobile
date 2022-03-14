@@ -12,7 +12,14 @@ class DetailAktivitasController extends GetxController with StateMixin {
   var listSubAktivitas = List<SubAktivitas>.empty().obs;
   var btnKategori = false.obs;
   var btnWaktu = true.obs;
-  List<RxBool> fillBtnKategory = [];
+  List<RxBool> fillBtnKategory = [
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs
+  ];
   List<RxBool> fillBtnSubAktivitas = [];
   List<RxBool> fillBtnSub = [false.obs, false.obs, false.obs];
   var aktivitasModel = AktivitasModel;
@@ -88,7 +95,8 @@ class DetailAktivitasController extends GetxController with StateMixin {
     listKategori.add(Kategori(kategori[3], false));
     listKategori.add(Kategori(kategori[4], false));
     listKategori.add(Kategori(kategori[5], false));
-    addBtnState(1);
+    // addBtnState(1);
+    print(fillBtnKategory);
     super.onInit();
   }
 
@@ -132,17 +140,12 @@ class DetailAktivitasController extends GetxController with StateMixin {
     try {
       lgp.showLogBook(id).then((value) {
         for (var data in value.logs) {
-          // change(
-          //     AktivitasModel(id, data.isDone, data.target, data.reality,
-          //         data.category, ["subAktivitas"], data.time, value.timestamp),
-          //     status: RxStatus.success());
           targetController.text = data.target;
           realitaController.text = data.reality;
           onWaktuSelected.value = data.time;
-          onKategoriSelected.value = data.category;
           onSubAktivitasSelected.value = "";
           datePicker.value = value.timestamp;
-          fillBtnKategory[0] = false.obs;
+          fillBtnKategory[kategori.indexOf(data.category)] = true.obs;
           change(null, status: RxStatus.success());
         }
         // print(value.logs);

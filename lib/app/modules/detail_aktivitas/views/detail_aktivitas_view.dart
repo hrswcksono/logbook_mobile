@@ -130,35 +130,37 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               SizedBox(
                 height: 10,
               ),
-              GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: 6,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 2.5,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20,
-                  ),
-                  itemBuilder: (context, index) {
-                    return ButtonKategori(
-                      text: controller.listKategori[index].text,
-                      onPress: () {
-                        print(controller.fillBtnKategory);
-                        if (controller.fillBtnKategory[index].value == true) {
-                          controller.onBtnState(1);
-                          controller.onKategoriSelected.value = "";
-                        } else {
-                          controller.onBtnState(1);
-                          controller.fillBtnKategory[index].toggle();
-                          controller.onKategoriSelected.value =
-                              controller.kategori[index];
-                          // print(controller.fillBtnKategory);
-                        }
-                      },
-                      stateValue: controller.fillBtnKategory[index],
-                    );
-                  }),
+              controller.obx(
+                (state) => GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: 6,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 2.5,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ButtonKategori(
+                        text: controller.listKategori[index].text,
+                        onPress: () {
+                          print(controller.fillBtnKategory);
+                          if (controller.fillBtnKategory[index].value == true) {
+                            controller.onBtnState(1);
+                            controller.onKategoriSelected.value = "";
+                          } else {
+                            controller.onBtnState(1);
+                            controller.fillBtnKategory[index].toggle();
+                            controller.onKategoriSelected.value =
+                                controller.kategori[index];
+                            // print(controller.fillBtnKategory);
+                          }
+                        },
+                        stateValue: controller.fillBtnKategory[index],
+                      );
+                    }),
+              ),
               SizedBox(
                 height: 15,
               ),
