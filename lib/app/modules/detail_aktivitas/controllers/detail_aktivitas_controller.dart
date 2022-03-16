@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:logbook_mobile/app/data/aktivitas_model.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/providers/detail_log_provider.dart';
 import 'package:logbook_mobile/app/modules/detail_aktivitas/sub_aktivitas_model.dart';
@@ -42,6 +43,12 @@ class DetailAktivitasController extends GetxController with StateMixin {
   var handlingView = false.obs;
 
   List<RxString> fillDetail = [];
+
+  String getDate(DateTime input) {
+    return DateFormat.EEEE().format(input).toString() +
+        ", " +
+        DateFormat("dd MMMM yyyy").format(input).toString();
+  }
 
   void onBtnState(int temp) {
     if (temp == 1) {
@@ -148,7 +155,6 @@ class DetailAktivitasController extends GetxController with StateMixin {
           fillBtnKategory[kategori.indexOf(data.category)] = true.obs;
           change(null, status: RxStatus.success());
         }
-        // print(value.logs);
       });
     } catch (e) {
       print(e.toString());
@@ -174,10 +180,5 @@ class DetailAktivitasController extends GetxController with StateMixin {
     } catch (err) {
       print("err");
     } finally {}
-  }
-
-  @override
-  void onClose() {
-    Get.offNamed('home');
   }
 }

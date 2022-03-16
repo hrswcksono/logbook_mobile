@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:logbook_mobile/app/data/aktivitas_model.dart';
 import 'package:logbook_mobile/app/modules/home/providers/logs_provider.dart';
+import 'package:logbook_mobile/app/util/helper.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeController extends GetxController
@@ -11,10 +15,13 @@ class HomeController extends GetxController
 
   RxBool btnCheckBox = false.obs;
   var listAktivitas = List<AktivitasModel>.empty().obs;
-  DateTime focusedDay = DateTime.now();
-  CalendarFormat calendarFormat = CalendarFormat.month;
-  DateTime? selectedDay;
+  var focusedDay = DateTime.now().obs;
+  var calendarFormat = CalendarFormat.month.obs;
   // var listProduct = List<Log>.empty().obs;
+  var selectedDay = DateTime.now().obs;
+  final box = GetStorage();
+
+  var fetchList = List<String>;
 
   LogsProvider lgp = Get.put(LogsProvider());
   var loading = true.obs;
@@ -33,6 +40,10 @@ class HomeController extends GetxController
     super.onInit();
   }
 
+  List<AktivitasModel> filterByDate(String date) {
+    return listAktivitas.where((element) => element.tanggal == date).toList();
+  }
+
   void removeList(int index, String str) {
     listAktivitas.value.removeAt(index);
     lgp.deleteLogs(str);
@@ -40,34 +51,78 @@ class HomeController extends GetxController
   }
 
   void fetchDataLogbook() async {
-    try {
-      var logbook = await LogsProvider().getListLogs().then((value) {
-        if (value.isNotEmpty) {
-          print("masuk");
-          for (var e in value.entries) {
-            // print(e.key);
-            for (var data in e.value.logs) {
-              listAktivitas.add(AktivitasModel(
-                  e.key,
-                  data.isDone,
-                  data.target,
-                  data.reality,
-                  data.category,
-                  ["fdsfds", "dsdsds"],
-                  data.time,
-                  e.value.timestamp));
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      try {
+        var logbook = await LogsProvider().getListLogs().then((value) {
+          if (value.isNotEmpty) {
+            print("masuk");
+            for (var e in value.entries) {
+              for (var data in e.value.logs) {
+                listAktivitas.add(AktivitasModel(
+                    id: e.key,
+                    selesai: data.isDone,
+                    judul: data.target,
+                    realita: data.reality,
+                    kategory: data.category,
+                    subAktivitas: "subaktivitas",
+                    waktu: data.time,
+                    tanggal: e.value.timestamp));
+              }
             }
+            // box.erase();
+            print(listAktivitas);
+            listDataByDate(getDate(DateTime.now()));
+            box.write('list', listAktivitas);
           }
-        }
-        change(listAktivitas, status: RxStatus.success());
-      }, onError: (_) {
+          change(listAktivitas, status: RxStatus.success());
+        }, onError: (_) {
+          change(null, status: RxStatus.error('tidak ada data'));
+          print("error");
+        });
+      } catch (e) {
         change(null, status: RxStatus.error('tidak ada data'));
-        print("error");
-      });
-    } catch (e) {
-      change(null, status: RxStatus.error('tidak ada data'));
-      e.printError();
-      print("catch");
+        e.printError();
+        print("catch");
+      }
+    } else {
+      // box.write('', value);
+      var readData = box.read('list');
+      for (var temp in readData) {
+        listAktivitas.add(AktivitasModel(
+            id: temp['id'],
+            selesai: temp['selesai'],
+            judul: temp['judul'],
+            realita: temp['realita'],
+            kategory: temp['kategory'],
+            subAktivitas: temp['subAktivitas'],
+            waktu: temp['waktu'],
+            tanggal: temp['tanggal']));
+      }
+      change(listAktivitas, status: RxStatus.success());
     }
+  }
+
+  void listDataByDate(String date) {
+    change(
+        listAktivitas.value
+            .where((element) => element.tanggal == date)
+            .toList(),
+        status: RxStatus.success());
+  }
+
+  void listDataByCategory(bool category) {
+    change(
+        listAktivitas.value
+            .where((element) => element.selesai == category)
+            .toList(),
+        status: RxStatus.success());
+  }
+
+  String getDate(DateTime input) {
+    return DateFormat.EEEE().format(input).toString() +
+        ", " +
+        DateFormat("dd MMMM yyyy").format(input).toString();
   }
 }

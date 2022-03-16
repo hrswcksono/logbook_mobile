@@ -44,6 +44,9 @@ class HomeView extends GetView<HomeController> {
                           Get.width, (Get.height - (Get.height - 70)), 20, 0),
                       items: [
                         PopupMenuItem(
+                          onTap: () {
+                            controller.listDataByCategory(false);
+                          },
                           value: 1,
                           child: Text(
                             "Aktivitas Tertunda",
@@ -54,6 +57,9 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         PopupMenuItem(
+                          onTap: (() {
+                            controller.listDataByCategory(true);
+                          }),
                           value: 1,
                           child: Text(
                             "Aktivitas Selesai",
@@ -64,6 +70,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         PopupMenuItem(
+                          onTap: (() {}),
                           value: 1,
                           child: Text(
                             "Aktivitas Semua",

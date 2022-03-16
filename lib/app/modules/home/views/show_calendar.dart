@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:logbook_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ShowCalendarTable extends StatefulWidget {
@@ -10,45 +12,36 @@ class ShowCalendarTable extends StatefulWidget {
 }
 
 class _ShowCalendarTableState extends State<ShowCalendarTable> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  final homeC = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
       firstDay: DateTime(2010),
       lastDay: DateTime(2040),
-      focusedDay: _focusedDay,
-      calendarFormat: _calendarFormat,
+      focusedDay: homeC.focusedDay.value,
+      calendarFormat: homeC.calendarFormat.value,
       selectedDayPredicate: (day) {
-        // Use `selectedDayPredicate` to determine which day is currently selected.
-        // If this returns true, then `day` will be marked as selected.
-
-        // Using `isSameDay` is recommended to disregard
-        // the time-part of compared DateTime objects.
-        return isSameDay(_selectedDay, day);
+        return isSameDay(homeC.selectedDay.value, day);
       },
       onDaySelected: (selectedDay, focusedDay) {
-        if (!isSameDay(_selectedDay, selectedDay)) {
-          // Call `setState()` when updating the selected day
+        if (!isSameDay(homeC.selectedDay.value, selectedDay)) {
           setState(() {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
+            homeC.selectedDay.value = selectedDay;
+            homeC.focusedDay.value = focusedDay;
+            homeC.listDataByDate(homeC.getDate(homeC.selectedDay.value));
           });
         }
       },
       onFormatChanged: (format) {
-        if (_calendarFormat != format) {
-          // Call `setState()` when updating calendar format
+        if (homeC.calendarFormat.value != format) {
           setState(() {
-            _calendarFormat = format;
+            homeC.calendarFormat.value = format;
           });
         }
       },
       onPageChanged: (focusedDay) {
-        // No need to call `setState()` here
-        _focusedDay = focusedDay;
+        homeC.focusedDay.value = focusedDay;
       },
     );
   }
