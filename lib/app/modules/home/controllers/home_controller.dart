@@ -19,6 +19,7 @@ class HomeController extends GetxController
   var calendarFormat = CalendarFormat.month.obs;
   // var listProduct = List<Log>.empty().obs;
   var selectedDay = DateTime.now().obs;
+  var categoryCounter = false.obs;
   final box = GetStorage();
 
   var fetchList = List<String>;
@@ -73,10 +74,11 @@ class HomeController extends GetxController
             }
             // box.erase();
             print(listAktivitas);
-            listDataByDate(getDate(DateTime.now()));
             box.write('list', listAktivitas);
           }
+
           change(listAktivitas, status: RxStatus.success());
+          filterList(false, getDate(DateTime.now()));
         }, onError: (_) {
           change(null, status: RxStatus.error('tidak ada data'));
           print("error");
@@ -104,18 +106,11 @@ class HomeController extends GetxController
     }
   }
 
-  void listDataByDate(String date) {
+  void filterList(bool category, String date) {
     change(
         listAktivitas.value
-            .where((element) => element.tanggal == date)
-            .toList(),
-        status: RxStatus.success());
-  }
-
-  void listDataByCategory(bool category) {
-    change(
-        listAktivitas.value
-            .where((element) => element.selesai == category)
+            .where((element) =>
+                element.selesai == category && element.tanggal == date)
             .toList(),
         status: RxStatus.success());
   }

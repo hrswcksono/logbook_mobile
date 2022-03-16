@@ -29,7 +29,8 @@ class _ShowCalendarTableState extends State<ShowCalendarTable> {
           setState(() {
             homeC.selectedDay.value = selectedDay;
             homeC.focusedDay.value = focusedDay;
-            homeC.listDataByDate(homeC.getDate(homeC.selectedDay.value));
+            homeC.filterList(homeC.categoryCounter.value,
+                homeC.getDate(homeC.selectedDay.value));
           });
         }
       },

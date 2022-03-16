@@ -45,7 +45,11 @@ class HomeView extends GetView<HomeController> {
                       items: [
                         PopupMenuItem(
                           onTap: () {
-                            controller.listDataByCategory(false);
+                            controller.categoryCounter.value = false;
+                            controller.filterList(
+                                controller.categoryCounter.value,
+                                controller
+                                    .getDate(controller.selectedDay.value));
                           },
                           value: 1,
                           child: Text(
@@ -58,7 +62,11 @@ class HomeView extends GetView<HomeController> {
                         ),
                         PopupMenuItem(
                           onTap: (() {
-                            controller.listDataByCategory(true);
+                            controller.categoryCounter.value = true;
+                            controller.filterList(
+                                controller.categoryCounter.value,
+                                controller
+                                    .getDate(controller.selectedDay.value));
                           }),
                           value: 1,
                           child: Text(
